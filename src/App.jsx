@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
+import { APP_INFO } from "../config";
 
-import {
-  listarContactos,
-  crearContacto,
-  eliminarContactoPorId,
-} from "./api";
+import { listarContactos, crearContacto, eliminarContactoPorId } from "./api";
 
 import FormularioContacto from "./components/FormularioContacto";
 import ContactoCard from "./components/ContactoCard";
@@ -24,14 +21,12 @@ function App() {
 
         const data = await listarContactos();
         setContactos(data);
-
       } catch (error) {
         console.error("Error al cargar contactos:", error);
 
         setError(
-          "No se pudieron cargar los contactos. Verifica que el servidor esté encendido e intenta de nuevo."
+          "No se pudieron cargar los contactos. Verifica que el servidor esté encendido e intenta de nuevo.",
         );
-
       } finally {
         setCargando(false);
       }
@@ -57,12 +52,11 @@ function App() {
 
       setContactos((prev) => [...prev, creado]);
       setExito(`Contacto "${creado.nombre}" agregado exitosamente`);
-
     } catch (error) {
       console.error("Error al crear contacto:", error);
 
       setError(
-        "No se pudo guardar el contacto. Verifica tu conexión o el estado del servidor e intenta nuevamente."
+        "No se pudo guardar el contacto. Verifica tu conexión o el estado del servidor e intenta nuevamente.",
       );
 
       throw error;
@@ -77,12 +71,11 @@ function App() {
 
       setContactos((prev) => prev.filter((c) => c.id !== id));
       setExito(`Contacto "${contactoAEliminar.nombre}" eliminado exitosamente`);
-
     } catch (error) {
       console.error("Error al eliminar contacto:", error);
 
       setError(
-        "No se pudo eliminar el contacto. Vuelve a intentarlo o verifica el servidor."
+        "No se pudo eliminar el contacto. Vuelve a intentarlo o verifica el servidor.",
       );
     }
   };
@@ -91,20 +84,14 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       {exito && <Notificacion mensaje={exito} tipo="exito" />}
       <div className="max-w-4xl mx-auto px-4 py-8">
-
         <header className="mb-8">
           <p className="text-xs tracking-[0.3em] text-gray-500 uppercase">
-            Desarrollo Web ReactJS Ficha 3223876
+            Desarrollo Web ReactJS Ficha {APP_INFO.ficha}
           </p>
-
           <h1 className="text-4xl font-extrabold text-gray-900 mt-2">
-            Agenda ADSO v6
+            {APP_INFO.titulo}
           </h1>
-
-          <p className="text-sm text-gray-600 mt-1">
-            Gestión de contactos conectada a una API local con JSON Server,
-            ahora con validaciones y mejor experiencia de usuario.
-          </p>
+          <p className="text-sm text-gray-600 mt-1">{APP_INFO.subtitulo}</p>
         </header>
 
         {error && (
@@ -145,7 +132,6 @@ function App() {
           <p>Desarrollo Web – ReactJS | Proyecto Agenda ADSO</p>
           <p>Instructor: Gustavo Adolfo Bolaños Dorado</p>
         </footer>
-
       </div>
     </div>
   );
