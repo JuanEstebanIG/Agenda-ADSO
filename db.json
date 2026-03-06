@@ -1,10 +1,38 @@
 {
   "contactos": [
     {
-      "id": "9cdc",
-      "nombre": "Juan Felipe",
+      "nombre": "Juan Felipe zapata",
       "telefono": "31555110",
       "correo": "isaj69@gmail.com",
+      "etiqueta": "",
+      "id": "9cdc"
+    },
+    {
+      "nombre": "maría",
+      "telefono": "312032451",
+      "correo": "maria@gmail.com",
+      "etiqueta": "",
+      "id": "16df"
+    },
+    {
+      "id": "ee42",
+      "nombre": "camila",
+      "telefono": "3123434",
+      "correo": "cami@gmail.com",
+      "etiqueta": ""
+    },
+    {
+      "id": "1725",
+      "nombre": "juan camilo",
+      "telefono": "310214343525",
+      "correo": "jc@gmail.com",
+      "etiqueta": "Desarrollador"
+    },
+    {
+      "id": "7bf5",
+      "nombre": "Manuela",
+      "telefono": "31043234",
+      "correo": "manu@gmail.com",
       "etiqueta": ""
     }
   ]
