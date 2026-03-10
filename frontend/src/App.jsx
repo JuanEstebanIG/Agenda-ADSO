@@ -122,28 +122,33 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neoAccent/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-neoAccentCyan/20 rounded-full blur-[120px] pointer-events-none"></div>
+
       {exito && <Notificacion mensaje={exito} tipo="exito" />}
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
         {/* HEADER */}
-        <header className="mb-10 text-center">
-          <p className="text-xs tracking-[0.35em] text-gray-500 uppercase">
+        <header className="mb-12 text-center relative group">
+          <p className="text-xs tracking-[0.4em] text-neoAccentCyan uppercase font-bold animate-pulse-slow">
             Desarrollo Web ReactJS Ficha {APP_INFO.ficha}
           </p>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mt-3">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neoAccent to-neoAccentCyan mt-4 tracking-wider drop-shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:drop-shadow-[0_0_25px_rgba(6,182,212,0.6)] transition-all duration-500">
             {APP_INFO.titulo}
           </h1>
 
-          <p className="text-gray-600 mt-2 max-w-xl mx-auto">
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto text-lg font-light tracking-wide">
             {APP_INFO.subtitulo}
           </p>
         </header>
 
         {error && (
-          <div className="mb-6 rounded-xl bg-red-50 border border-red-200 px-5 py-3">
-            <p className="text-sm font-medium text-red-700">{error}</p>
+          <div className="mb-8 rounded-xl glass-panel border-red-500/30 px-5 py-4 relative overflow-hidden animate-pulse-slow">
+            <div className="absolute inset-0 bg-red-500/10"></div>
+            <p className="text-sm font-medium text-red-400 relative z-10 text-center tracking-wide">{error}</p>
           </div>
         )}
 
@@ -164,7 +169,7 @@ function App() {
             )}
 
             {/* FORMULARIO */}
-            <div className="bg-white shadow-md rounded-xl p-6 mb-8">
+            <div className="mb-10">
               <FormularioContacto onAgregar={onAgregarContacto} />
             </div>
 

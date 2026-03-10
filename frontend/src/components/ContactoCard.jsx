@@ -8,27 +8,28 @@ export default function ContactoCard({
   onEditar,
 }) {
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-6 flex items-start justify-between gap-4 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
+    <div className="glass-panel glass-panel-hover rounded-2xl p-6 flex items-start justify-between gap-4 hover:-translate-y-1 group relative">
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neoAccent/0 via-transparent to-neoAccentCyan/0 group-hover:from-neoAccent/10 group-hover:to-neoAccentCyan/10 transition-all duration-500 pointer-events-none"></div>
       {/* Avatar + info */}
-      <div className="flex items-start gap-4">
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg shadow-md hover:shadow-lg transition-all duration-300">
+      <div className="flex items-start gap-4 relative z-10">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/50 border border-neoAccent text-neoAccent font-bold text-xl shadow-[0_0_10px_rgba(217,70,239,0.5)] group-hover:shadow-[0_0_15px_rgba(217,70,239,0.8)] transition-all duration-300 font-mono">
           {nombre.charAt(0).toUpperCase()}
         </div>
 
         <div className="space-y-1">
-          <h3 className="font-semibold text-gray-900 text-lg leading-none">
+          <h3 className="font-bold text-gray-100 text-lg leading-none tracking-wide">
             {nombre}
           </h3>
 
-          <p className="text-sm text-gray-600">{telefono}</p>
-          <p className="text-sm text-gray-500">{correo}</p>
+          <p className="text-sm text-neoAccentCyan font-mono">{telefono}</p>
+          <p className="text-sm text-gray-400">{correo}</p>
 
           {empresa && (
-            <p className="text-sm text-indigo-600 font-medium">{empresa}</p>
+            <p className="text-sm text-neoAccent font-medium tracking-wider">{empresa}</p>
           )}
 
           {etiqueta && (
-            <span className="inline-block mt-2 text-xs bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 px-3 py-1 rounded-full shadow-sm font-medium">
+            <span className="inline-block mt-3 text-xs bg-black/60 border border-neoBorder text-gray-300 px-3 py-1 rounded-sm shadow-sm font-mono tracking-widest uppercase">
               {etiqueta}
             </span>
           )}
@@ -36,11 +37,11 @@ export default function ContactoCard({
       </div>
 
       {/* Acciones */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3 relative z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
         {onEditar && (
           <button
             onClick={onEditar}
-            className="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-yellow-500 text-white hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+            className="text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-sm bg-black/40 border border-neoAccent/50 text-neoAccent hover:bg-neoAccent hover:text-white transition-all duration-300 shadow-[0_0_5px_rgba(217,70,239,0.2)] hover:shadow-[0_0_15px_rgba(217,70,239,0.6)] transform hover:scale-105"
           >
             Editar
           </button>
@@ -48,7 +49,7 @@ export default function ContactoCard({
 
         <button
           onClick={onEliminar}
-          className="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-red-400 to-red-500 text-white hover:from-red-500 hover:to-red-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+          className="text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-sm bg-black/40 border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300 shadow-[0_0_5px_rgba(239,68,68,0.2)] hover:shadow-[0_0_15px_rgba(239,68,68,0.6)] transform hover:scale-105"
         >
           Eliminar
         </button>

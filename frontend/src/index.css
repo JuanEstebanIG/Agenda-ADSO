@@ -2,23 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-@apply bg-gray-50 text-gray-800 font-sans;
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/Orbitron.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
 }
 
-@keyframes slide-down {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -100%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+body {
+  @apply bg-neoBg text-gray-200 font-sans;
+  background-image: 
+    linear-gradient(rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.8)),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 @layer utilities {
-  .animate-slide-down {
-    animation: slide-down 0.3s ease-out;
+  .glass-panel {
+    @apply bg-neoGlass backdrop-blur-xl border border-neoBorder shadow-2xl;
+  }
+  .glass-panel-hover {
+    @apply hover:bg-neoGlassHover transition-all duration-300;
+  }
+  .neo-input {
+    @apply bg-black/40 border border-neoBorder text-gray-200 focus:border-neoAccentCyan focus:ring-1 focus:ring-neoAccentCyan outline-none transition-all duration-300 backdrop-blur-sm;
   }
 }

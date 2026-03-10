@@ -94,24 +94,25 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
 
  return (
   <form
-    className="bg-gradient-to-br from-white to-purple-50 shadow-2xl rounded-3xl p-8 sm:p-10 border border-purple-200 max-w-4xl mx-auto space-y-8 backdrop-blur-sm"
+    className="glass-panel p-8 sm:p-10 max-w-4xl mx-auto space-y-8 rounded-2xl relative group"
     onSubmit={onSubmit}
   >
+    <div className="absolute -inset-0.5 bg-gradient-to-r from-neoAccent to-neoAccentCyan rounded-2xl opacity-10 group-hover:opacity-30 blur transition duration-1000 -z-10"></div>
 
-    <div className="flex items-center gap-4 mb-6">
-      <div className="w-2 h-10 bg-gradient-to-b from-purple-600 to-purple-800 rounded-full shadow-lg"></div>
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
+    <div className="flex items-center gap-4 mb-8">
+      <div className="w-2 h-10 bg-neoAccentCyan shadow-[0_0_10px_rgba(6,182,212,0.6)] animate-pulse-slow"></div>
+      <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-wider uppercase font-mono drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
         {contactoInicial ? "Editar contacto" : "Nuevo contacto"}
       </h2>
     </div>
 
     {/* GRID CAMPOS */}
-    <div className="grid sm:grid-cols-2 gap-5">
+    <div className="grid sm:grid-cols-2 gap-6">
 
       {/* nombre */}
       <div className="sm:col-span-2">
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
-          Nombre <span className="text-red-500">*</span>
+        <label className="block text-xs font-mono tracking-widest text-gray-400 uppercase mb-2">
+          Nombre <span className="text-neoAccent">*</span>
         </label>
 
         <input
@@ -119,18 +120,18 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.nombre}
           onChange={onChange}
           placeholder="Ej: Camila Pérez"
-          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
+          className="w-full px-5 py-4 rounded-sm neo-input text-base font-mono placeholder:text-gray-600"
         />
 
         {errores.nombre && (
-          <p className="text-xs text-red-600 mt-1">{errores.nombre}</p>
+          <p className="text-xs text-red-500 mt-2 font-mono tracking-wider">{errores.nombre}</p>
         )}
       </div>
 
       {/* telefono */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
-          Teléfono <span className="text-red-500">*</span>
+        <label className="block text-xs font-mono tracking-widest text-gray-400 uppercase mb-2">
+          Teléfono <span className="text-neoAccent">*</span>
         </label>
 
         <input
@@ -139,18 +140,18 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.telefono}
           onChange={onChange}
           placeholder="300 123 4567"
-          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
+          className="w-full px-5 py-4 rounded-sm neo-input text-base font-mono placeholder:text-gray-600"
         />
 
         {errores.telefono && (
-          <p className="text-xs text-red-600 mt-1">{errores.telefono}</p>
+          <p className="text-xs text-red-500 mt-2 font-mono tracking-wider">{errores.telefono}</p>
         )}
       </div>
 
       {/* correo */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
-          Correo <span className="text-red-500">*</span>
+        <label className="block text-xs font-mono tracking-widest text-gray-400 uppercase mb-2">
+          Correo <span className="text-neoAccent">*</span>
         </label>
 
         <input
@@ -159,18 +160,18 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.correo}
           onChange={onChange}
           placeholder="correo@email.com"
-          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
+          className="w-full px-5 py-4 rounded-sm neo-input text-base font-mono placeholder:text-gray-600"
         />
 
         {errores.correo && (
-          <p className="text-xs text-red-600 mt-1">{errores.correo}</p>
+          <p className="text-xs text-red-500 mt-2 font-mono tracking-wider">{errores.correo}</p>
         )}
       </div>
 
       {/* etiqueta */}
       <div className="sm:col-span-2">
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
-          Etiqueta <span className="text-gray-400">(opcional)</span>
+        <label className="block text-xs font-mono tracking-widest text-gray-400 uppercase mb-2">
+          Etiqueta <span className="text-gray-600">(opcional)</span>
         </label>
 
         <input
@@ -178,21 +179,21 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.etiqueta}
           onChange={onChange}
           placeholder="Ej: Trabajo"
-          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
+          className="w-full px-5 py-4 rounded-sm neo-input text-base font-mono placeholder:text-gray-600"
         />
       </div>
 
     </div>
 
     {/* botones */}
-    <div className="flex flex-col sm:flex-row gap-3 pt-4">
+    <div className="flex flex-col sm:flex-row gap-4 pt-6 relative z-10">
 
       <button
         type="submit"
         disabled={enviando}
-        className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-purple-300 disabled:to-purple-400 text-white py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+        className="flex-1 bg-neoAccent/20 border border-neoAccent text-neoAccent hover:bg-neoAccent hover:text-white disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-neoAccent disabled:cursor-not-allowed font-mono uppercase tracking-widest py-4 rounded-sm transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.6)] transform hover:-translate-y-1 active:scale-95 text-sm"
       >
-        {enviando ? "Guardando..." : contactoInicial ? "Actualizar contacto" : "Agregar contacto"}
+        {enviando ? "Guardando..." : contactoInicial ? "Actualizar" : "Agregar"}
       </button>
 
       {contactoInicial && onCancelar && (
@@ -203,7 +204,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
             setErrores({ nombre: "", telefono: "", correo: "" });
             onCancelar();
           }}
-          className="flex-1 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-800 py-4 rounded-xl font-bold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
+          className="flex-1 bg-black/40 border border-neoBorder text-gray-400 hover:text-white hover:border-gray-500 font-mono uppercase tracking-widest py-4 rounded-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 active:scale-95 text-sm"
         >
           Cancelar
         </button>

@@ -42,25 +42,24 @@ export default function BusquedaContacto({ contactos, setContactosFiltrados }) {
   }
 
   const botonClass = (miCampo) =>
-    `px-4 py-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transform hover:scale-105 active:scale-95 ${campo === miCampo
-      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg"
-      : "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg"
+    `px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-widest transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-neoAccentCyan transform hover:scale-105 active:scale-95 border ${campo === miCampo
+      ? "bg-neoAccentCyan/20 border-neoAccentCyan text-neoAccentCyan shadow-[0_0_10px_rgba(6,182,212,0.4)]"
+      : "bg-black/40 border-neoBorder text-gray-400 hover:bg-neoAccentCyan/10 hover:border-neoAccentCyan/50 hover:text-neoAccentCyan shadow-md"
     }`;
 
 return (
-  <div className="mb-6 bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm">
+  <div className="mb-8 glass-panel rounded-2xl p-6 transition-all duration-300 relative overflow-hidden group">
+    <div className="absolute inset-0 bg-gradient-to-r from-neoAccentCyan/0 via-transparent to-neoAccent/0 group-hover:from-neoAccentCyan/5 group-hover:to-neoAccent/5 transition-all duration-500 pointer-events-none"></div>
 
     {/* barra de búsqueda */}
-    <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+    <div className="flex flex-col sm:flex-row gap-4 sm:items-center relative z-10">
 
       <input
         type="text"
         placeholder="Buscar contactos..."
         value={valor}
         onChange={onChange}
-        className="flex-1 px-4 py-3 border border-gray-300 rounded-xl 
-        focus:outline-none focus:ring-4 focus:ring-purple-300 focus:border-purple-500 
-        transition-all duration-300 text-sm bg-white shadow-sm hover:shadow-md"
+        className="flex-1 px-5 py-3 rounded-sm neo-input text-base font-mono placeholder:text-gray-600 tracking-wide"
       />
 
       {/* filtros */}
