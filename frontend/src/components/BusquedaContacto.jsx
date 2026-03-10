@@ -42,14 +42,13 @@ export default function BusquedaContacto({ contactos, setContactosFiltrados }) {
   }
 
   const botonClass = (miCampo) =>
-    `px-4 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-      campo === miCampo
-        ? "bg-blue-700 text-white"
-        : "bg-blue-500 text-white hover:bg-blue-600 active:scale-95"
+    `px-4 py-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transform hover:scale-105 active:scale-95 ${campo === miCampo
+      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg"
+      : "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg"
     }`;
 
 return (
-  <div className="mb-6 bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+  <div className="mb-6 bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm">
 
     {/* barra de búsqueda */}
     <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -59,9 +58,9 @@ return (
         placeholder="Buscar contactos..."
         value={valor}
         onChange={onChange}
-        className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg 
-        focus:outline-none focus:ring-2 focus:ring-purple-500 
-        focus:border-purple-500 transition text-sm"
+        className="flex-1 px-4 py-3 border border-gray-300 rounded-xl 
+        focus:outline-none focus:ring-4 focus:ring-purple-300 focus:border-purple-500 
+        transition-all duration-300 text-sm bg-white shadow-sm hover:shadow-md"
       />
 
       {/* filtros */}

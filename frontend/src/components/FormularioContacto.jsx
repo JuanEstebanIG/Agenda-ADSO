@@ -94,14 +94,13 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
 
  return (
   <form
-    className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-200 max-w-3xl mx-auto space-y-6"
+    className="bg-gradient-to-br from-white to-purple-50 shadow-2xl rounded-3xl p-8 sm:p-10 border border-purple-200 max-w-4xl mx-auto space-y-8 backdrop-blur-sm"
     onSubmit={onSubmit}
   >
 
-    {/* titulo */}
-    <div className="flex items-center gap-3 mb-4">
-      <div className="w-1 h-8 bg-purple-600 rounded-full"></div>
-      <h2 className="text-2xl font-bold text-gray-900">
+    <div className="flex items-center gap-4 mb-6">
+      <div className="w-2 h-10 bg-gradient-to-b from-purple-600 to-purple-800 rounded-full shadow-lg"></div>
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
         {contactoInicial ? "Editar contacto" : "Nuevo contacto"}
       </h2>
     </div>
@@ -120,7 +119,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.nombre}
           onChange={onChange}
           placeholder="Ej: Camila Pérez"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
+          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
         />
 
         {errores.nombre && (
@@ -140,7 +139,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.telefono}
           onChange={onChange}
           placeholder="300 123 4567"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
+          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
         />
 
         {errores.telefono && (
@@ -160,7 +159,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.correo}
           onChange={onChange}
           placeholder="correo@email.com"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
+          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
         />
 
         {errores.correo && (
@@ -179,7 +178,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
           value={form.etiqueta}
           onChange={onChange}
           placeholder="Ej: Trabajo"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
+          className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-200 outline-none transition-all duration-300 bg-white shadow-sm hover:shadow-md text-gray-900 placeholder-gray-400"
         />
       </div>
 
@@ -191,7 +190,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
       <button
         type="submit"
         disabled={enviando}
-        className="flex-1 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-300 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
+        className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-purple-300 disabled:to-purple-400 text-white py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
       >
         {enviando ? "Guardando..." : contactoInicial ? "Actualizar contacto" : "Agregar contacto"}
       </button>
@@ -204,7 +203,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
             setErrores({ nombre: "", telefono: "", correo: "" });
             onCancelar();
           }}
-          className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold transition"
+          className="flex-1 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-800 py-4 rounded-xl font-bold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
         >
           Cancelar
         </button>
