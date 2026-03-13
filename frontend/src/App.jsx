@@ -131,18 +131,22 @@ function App() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
         {/* HEADER */}
-        <header className="mb-12 text-center relative group">
-          <p className="text-xs tracking-[0.4em] text-neoAccentCyan uppercase font-bold animate-pulse-slow">
-            Desarrollo Web ReactJS Ficha {APP_INFO.ficha}
-          </p>
+        <header className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative group">
+          <div className="text-center md:text-left">
+            <p className="text-xs tracking-[0.4em] text-neoAccentCyan uppercase font-bold animate-pulse-slow">
+              Desarrollo Web ReactJS Ficha {APP_INFO.ficha}
+            </p>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neoAccent to-neoAccentCyan mt-4 tracking-wider drop-shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:drop-shadow-[0_0_25px_rgba(6,182,212,0.6)] transition-all duration-500">
-            {APP_INFO.titulo}
-          </h1>
+            <h1 className="text-xl sm:text-5xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neoAccent to-neoAccentCyan mt-4 tracking-wider drop-shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:drop-shadow-[0_0_25px_rgba(6,182,212,0.6)] transition-all duration-500">
+              {APP_INFO.titulo}
+            </h1>
+          </div>
 
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto text-lg font-light tracking-wide">
-            {APP_INFO.subtitulo}
-          </p>
+          <div className="text-center md:text-right max-w-sm lg:max-w-md">
+            <p className="text-gray-400 text-lg font-light tracking-wide">
+              {APP_INFO.subtitulo}
+            </p>
+          </div>
         </header>
 
         {error && (
@@ -168,39 +172,46 @@ function App() {
               </Modal>
             )}
 
-            {/* FORMULARIO */}
-            <div className="mb-10">
-              <FormularioContacto onAgregar={onAgregarContacto} />
-            </div>
+            {/* MAIN LAYOUT GRID */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* SIDEBAR: Formulario */}
+              <div className="lg:col-span-5 lg:sticky lg:top-8 w-full">
+                <FormularioContacto onAgregar={onAgregarContacto} />
+              </div>
 
-            {/* BUSCADOR */}
-            <div className="mb-8">
-              <BusquedaContacto
-                contactos={contactos}
-                setContactosFiltrados={setContactosFiltrados}
-              />
-            </div>
-
-            {/* LISTA CONTACTOS */}
-            {contactos.length === 0 ? (
-              <p className="text-center text-gray-500">
-                Aún no tienes contactos registrados.
-              </p>
-            ) : (
-              <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {contactosFiltrados.map((c) => (
-                  <ContactoCard
-                    key={c.id}
-                    nombre={c.nombre}
-                    telefono={c.telefono}
-                    correo={c.correo}
-                    etiqueta={c.etiqueta}
-                    onEliminar={() => onEliminarContacto(c.id)}
-                    onEditar={() => iniciarEdicion(c)}
+              {/* MAIN CONTENT: Buscador y Lista de Contactos */}
+              <div className="lg:col-span-7 flex flex-col">
+                {/* BUSCADOR */}
+                <div className="mb-8">
+                  <BusquedaContacto
+                    contactos={contactos}
+                    setContactosFiltrados={setContactosFiltrados}
                   />
-                ))}
-              </section>
-            )}
+                </div>
+
+                {/* LISTA CONTACTOS */}
+                {contactos.length === 0 ? (
+                  <p className="text-center text-gray-500">
+                    Aún no tienes contactos registrados.
+                  </p>
+                ) : (
+                  <section className="grid gap-5 sm:grid-cols-2">
+                    {contactosFiltrados.map((c) => (
+                      <ContactoCard
+                        key={c.id}
+                        nombre={c.nombre}
+                        telefono={c.telefono}
+                        correo={c.correo}
+                        etiqueta={c.etiqueta}
+                        onEliminar={() => onEliminarContacto(c.id)}
+                        onEditar={() => iniciarEdicion(c)}
+                      />
+                    ))}
+                  </section>
+                )}
+              </div>
+            </div>
           </>
         )}
 

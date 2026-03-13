@@ -1,108 +1,100 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function BusquedaContacto({ contactos, setContactosFiltrados }) {
-  // valor actual del input y campo seleccionado
   const [valor, setValor] = useState("");
   const [campo, setCampo] = useState("todos");
+  const [orden, setOrden] = useState("default");
 
-  function filtrar(v, c) {
-    const valorLower = v.toLowerCase();
-    const filtrados = contactos.filter((cobj) => {
-      switch (c) {
-        case "nombre":
-          return cobj.nombre.toLowerCase().includes(valorLower);
-        case "correo":
-          return cobj.correo.toLowerCase().includes(valorLower);
-        case "etiqueta":
-          return cobj.etiqueta.toLowerCase().includes(valorLower);
-        case "numero":
-          return cobj.telefono.toLowerCase().includes(valorLower);
-        default:
-          // "todos": buscar en todas las propiedades
-          return (
-            cobj.nombre.toLowerCase().includes(valorLower) ||
-            cobj.correo.toLowerCase().includes(valorLower) ||
-            cobj.etiqueta.toLowerCase().includes(valorLower) ||
-            cobj.telefono.toLowerCase().includes(valorLower)
-          );
+  useEffect(() => {
+    function filtrarYOrdenar() {
+      const valorLower = valor.toLowerCase();
+      
+      // Filtrar
+      let procesados = contactos.filter((cobj) => {
+        switch (campo) {
+          case "nombre":
+            return cobj.nombre.toLowerCase().includes(valorLower);
+          case "correo":
+            return cobj.correo.toLowerCase().includes(valorLower);
+          case "etiqueta":
+            return cobj.etiqueta.toLowerCase().includes(valorLower);
+          case "numero":
+            return cobj.telefono.toLowerCase().includes(valorLower);
+          default:
+            return (
+              cobj.nombre.toLowerCase().includes(valorLower) ||
+              cobj.correo.toLowerCase().includes(valorLower) ||
+              cobj.etiqueta.toLowerCase().includes(valorLower) ||
+              cobj.telefono.toLowerCase().includes(valorLower)
+            );
+        }
+      });
+
+      // Ordenar
+      if (orden === "a-z") {
+        procesados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      } else if (orden === "z-a") {
+        procesados.sort((a, b) => b.nombre.localeCompare(a.nombre));
+      } else if (orden === "asc") {
+        procesados.sort((a, b) => parseInt(a.telefono.replace(/\D/g, '') || 0) - parseInt(b.telefono.replace(/\D/g, '') || 0));
+      } else if (orden === "desc") {
+        procesados.sort((a, b) => parseInt(b.telefono.replace(/\D/g, '') || 0) - parseInt(a.telefono.replace(/\D/g, '') || 0));
       }
-    });
-    setContactosFiltrados(filtrados);
-  }
 
-  function onChange(e) {
-    const nuevoValor = e.target.value;
-    setValor(nuevoValor);
-    filtrar(nuevoValor, campo);
-  }
+      setContactosFiltrados(procesados);
+    }
 
-  function cambiarCampo(nuevoCampo) {
-    setCampo(nuevoCampo);
-    filtrar(valor, nuevoCampo);
-  }
+    filtrarYOrdenar();
+  }, [contactos, valor, campo, orden, setContactosFiltrados]);
 
-  const botonClass = (miCampo) =>
-    `px-4 py-2 rounded-sm font-mono text-xs uppercase tracking-widest transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-neoAccentCyan transform hover:scale-105 active:scale-95 border ${campo === miCampo
-      ? "bg-neoAccentCyan/20 border-neoAccentCyan text-neoAccentCyan shadow-[0_0_10px_rgba(6,182,212,0.4)]"
-      : "bg-black/40 border-neoBorder text-gray-400 hover:bg-neoAccentCyan/10 hover:border-neoAccentCyan/50 hover:text-neoAccentCyan shadow-md"
-    }`;
+  return (
+    <div className="glass-panel rounded-2xl p-6 transition-all duration-300 relative overflow-hidden group">
+      <div className="absolute inset-0 bg-gradient-to-r from-neoAccentCyan/0 via-transparent to-neoAccent/0 group-hover:from-neoAccentCyan/5 group-hover:to-neoAccent/5 transition-all duration-500 pointer-events-none"></div>
 
-return (
-  <div className="mb-8 glass-panel rounded-2xl p-6 transition-all duration-300 relative overflow-hidden group">
-    <div className="absolute inset-0 bg-gradient-to-r from-neoAccentCyan/0 via-transparent to-neoAccent/0 group-hover:from-neoAccentCyan/5 group-hover:to-neoAccent/5 transition-all duration-500 pointer-events-none"></div>
+      <div className="flex flex-col md:flex-row gap-4 relative z-10 w-full items-center">
+        {/* Input búsqueda */}
+        <div className="flex-1 w-full">
+          <input
+            type="text"
+            placeholder="Buscar contactos..."
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+            className="w-full px-5 py-3 rounded-sm neo-input text-base font-mono placeholder:text-gray-600 tracking-wide"
+          />
+        </div>
 
-    {/* barra de búsqueda */}
-    <div className="flex flex-col sm:flex-row gap-4 sm:items-center relative z-10">
+        {/* Dropdown filtros */}
+        <div className="w-full md:w-48 relative">
+          <select
+            value={campo}
+            onChange={(e) => setCampo(e.target.value)}
+            className="w-full px-4 py-3 rounded-sm font-mono text-xs uppercase tracking-widest text-gray-300 bg-black/40 border border-neoBorder focus:outline-none focus:border-neoAccentCyan focus:ring-1 focus:ring-neoAccentCyan cursor-pointer appearance-none transition-all duration-300 hover:bg-black/60 shadow-md"
+            style={{ backgroundImage: `url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.5rem top 50%', backgroundSize: '1.2rem auto' }}
+          >
+            <option value="todos" className="bg-gray-900">Filtrar: Todos</option>
+            <option value="nombre" className="bg-gray-900">Nombre</option>
+            <option value="correo" className="bg-gray-900">Correo</option>
+            <option value="etiqueta" className="bg-gray-900">Etiqueta</option>
+            <option value="numero" className="bg-gray-900">Número</option>
+          </select>
+        </div>
 
-      <input
-        type="text"
-        placeholder="Buscar contactos..."
-        value={valor}
-        onChange={onChange}
-        className="flex-1 px-5 py-3 rounded-sm neo-input text-base font-mono placeholder:text-gray-600 tracking-wide"
-      />
-
-      {/* filtros */}
-      <div className="flex flex-wrap gap-2">
-
-        <button
-          className={botonClass("todos")}
-          onClick={() => cambiarCampo("todos")}
-        >
-          Todos
-        </button>
-
-        <button
-          className={botonClass("nombre")}
-          onClick={() => cambiarCampo("nombre")}
-        >
-          Nombre
-        </button>
-
-        <button
-          className={botonClass("correo")}
-          onClick={() => cambiarCampo("correo")}
-        >
-          Correo
-        </button>
-
-        <button
-          className={botonClass("etiqueta")}
-          onClick={() => cambiarCampo("etiqueta")}
-        >
-          Etiqueta
-        </button>
-
-        <button
-          className={botonClass("numero")}
-          onClick={() => cambiarCampo("numero")}
-        >
-          Número
-        </button>
-
+        {/* Dropdown ordenar */}
+        <div className="w-full md:w-48 relative">
+          <select
+            value={orden}
+            onChange={(e) => setOrden(e.target.value)}
+            className="w-full px-4 py-3 rounded-sm font-mono text-xs uppercase tracking-widest text-gray-300 bg-black/40 border border-neoBorder focus:outline-none focus:border-neoAccentCyan focus:ring-1 focus:ring-neoAccentCyan cursor-pointer appearance-none transition-all duration-300 hover:bg-black/60 shadow-md"
+            style={{ backgroundImage: `url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.5rem top 50%', backgroundSize: '1.2rem auto' }}
+          >
+            <option value="default" className="bg-gray-900">Ordenar: Default</option>
+            <option value="a-z" className="bg-gray-900">Letra (A-Z)</option>
+            <option value="z-a" className="bg-gray-900">Letra (Z-A)</option>
+            <option value="desc" className="bg-gray-900">Número Mayor</option>
+            <option value="asc" className="bg-gray-900">Número Menor</option>
+          </select>
+        </div>
       </div>
     </div>
-
-  </div>
-);
+  );
 }

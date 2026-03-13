@@ -94,7 +94,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
 
  return (
   <form
-    className="glass-panel p-8 sm:p-10 max-w-4xl mx-auto space-y-8 rounded-2xl relative group"
+    className="glass-panel p-8 sm:p-12 w-full mx-auto space-y-10 rounded-2xl relative group"
     onSubmit={onSubmit}
   >
     <div className="absolute -inset-0.5 bg-gradient-to-r from-neoAccent to-neoAccentCyan rounded-2xl opacity-10 group-hover:opacity-30 blur transition duration-1000 -z-10"></div>
@@ -191,7 +191,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
       <button
         type="submit"
         disabled={enviando}
-        className="flex-1 bg-neoAccent/20 border border-neoAccent text-neoAccent hover:bg-neoAccent hover:text-white disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-neoAccent disabled:cursor-not-allowed font-mono uppercase tracking-widest py-4 rounded-sm transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.6)] transform hover:-translate-y-1 active:scale-95 text-sm"
+        className="flex-1 bg-neoAccent/20 border border-neoAccent text-neoAccent hover:bg-neoAccent hover:text-white disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-neoAccent disabled:cursor-not-allowed font-mono uppercase tracking-widest py-5 rounded-sm transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.6)] transform hover:-translate-y-1 active:scale-95 text-base font-bold"
       >
         {enviando ? "Guardando..." : contactoInicial ? "Actualizar" : "Agregar"}
       </button>
@@ -204,7 +204,7 @@ function FormularioContacto({ onAgregar, onActualizar, contactoInicial, onCancel
             setErrores({ nombre: "", telefono: "", correo: "" });
             onCancelar();
           }}
-          className="flex-1 bg-black/40 border border-neoBorder text-gray-400 hover:text-white hover:border-gray-500 font-mono uppercase tracking-widest py-4 rounded-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 active:scale-95 text-sm"
+          className="flex-1 bg-black/40 border border-neoBorder text-gray-400 hover:text-white hover:border-gray-500 font-mono uppercase tracking-widest py-5 rounded-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 active:scale-95 text-base font-bold"
         >
           Cancelar
         </button>
